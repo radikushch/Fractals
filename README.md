@@ -1,1 +1,1 @@
-Fractal generator
+Fractal generator
