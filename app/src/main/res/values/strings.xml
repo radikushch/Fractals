@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mandelbrot">Mandelbrot</string>
+    <string name="julia">Julia</string>
+    <string name="newton">Newton</string>
+    <string name="tree">Tree</string>
+    <string name="app_name">World of Fractals</string>
+
+</resources>
