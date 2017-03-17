@@ -31,7 +31,6 @@ public class BuildManager extends AppCompatActivity implements View.OnClickListe
         mediaPlayer = MediaPlayer.create(this, R.raw.sound);
         mediaPlayer.start();
 
-
         draw = new DrawView(this);
         draw.setBackgroundColor(Color.WHITE);
         container = (ImageView) findViewById(R.id.container);
