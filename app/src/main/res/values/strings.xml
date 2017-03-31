@@ -5,5 +5,10 @@
     <string name="newton">Newton</string>
     <string name="tree">Tree</string>
     <string name="app_name">World of Fractals</string>
+    <string name="chip">Chip</string>
+    <string name="star">Star</string>
+    <string name="cross">Cross</string>
+    <string name="kamtorus">Kamtorus</string>
+    <string name="starsc">STARSC</string>
 
 </resources>

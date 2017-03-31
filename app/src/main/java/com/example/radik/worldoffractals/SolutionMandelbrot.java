@@ -25,7 +25,6 @@ public class SolutionMandelbrot {
         cyStart  = -1.5;//-1.0;
         canvas = new Canvas(drawView.bitmap);
 
-
         for(i = 0, cx = cxStart; i < drawView.bitmap.getWidth(); i++, cx += dx)
             for(j = 0, cy = cyStart; j < drawView.bitmap.getHeight(); j++, cy += dy) {
                 x = cx;
@@ -47,10 +46,9 @@ public class SolutionMandelbrot {
                     }
                     if (z > Rmin) {
                         //col = color | Iter;
-                        p.setColor(Color.BLUE);
-                        canvas.drawPoint(i, j, p);
+                        //p.setColor(Color.BLUE);
+                        //canvas.drawPoint(i, j, p);
                         flag = false;
-
                     }
                 }
                 continue;
