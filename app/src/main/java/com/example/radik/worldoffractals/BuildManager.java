@@ -3,19 +3,30 @@ package com.example.radik.worldoffractals;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 public class BuildManager extends AppCompatActivity implements View.OnClickListener {
 
     DrawView draw;
     Button but1, but2, but3, but4, but5, but6, but7, but8, but9;
-    ImageButton soundbtn, soundbtnplay, exit;
+    ImageButton soundbtn, soundbtnplay, exit, savebut;
     SolutionMandelbrot mandelbrot;
     SolutionJulia julia;
     SolutionNewton newton;
@@ -51,6 +62,7 @@ public class BuildManager extends AppCompatActivity implements View.OnClickListe
         soundbtn = (ImageButton) findViewById(R.id.soundbtn);
         soundbtnplay =(ImageButton)  findViewById(R.id.soundbtnplay);
         exit = (ImageButton) findViewById(R.id.exit);
+        savebut = (ImageButton) findViewById(R.id.savebut);
 
         but1.setOnClickListener(this);
         but2.setOnClickListener(this);
@@ -64,6 +76,7 @@ public class BuildManager extends AppCompatActivity implements View.OnClickListe
         soundbtn.setOnClickListener(this);
         soundbtnplay.setOnClickListener(this);
         exit.setOnClickListener(this);
+        savebut.setOnClickListener(this);
 
         mandelbrot = new SolutionMandelbrot();
         julia = new SolutionJulia();
@@ -134,6 +147,9 @@ public class BuildManager extends AppCompatActivity implements View.OnClickListe
                 soundbtnplay.setVisibility(View.INVISIBLE);
                 soundbtn.setVisibility(View.VISIBLE);
                 break;
+            case R.id.savebut:
+                writeFile(draw);
+                break;
             case R.id.exit:
                 mediaPlayer.stop();
                 this.finish();
@@ -146,4 +162,25 @@ public class BuildManager extends AppCompatActivity implements View.OnClickListe
         Bitmap rotate = Bitmap.createBitmap(draw.bitmap, 0, 0, draw.bitmap.getWidth(), draw.bitmap.getHeight(), m, true);
         container.setImageBitmap(rotate);
     }
+
+    private String writeFile(DrawView draw){
+        OutputStream fos;
+        int counter = 0;
+
+        try {
+            File file = new File(getApplicationContext().getCacheDir(), "Fractal" + counter +".jpg");
+            fos = new FileOutputStream(file);
+
+            draw.bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fos);
+            fos.flush();
+            fos.close();
+            MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(),  file.getName());
+        }
+        catch (Exception e){
+            return e.getMessage();
+        }
+        return "";
+    }
 }
+
+
